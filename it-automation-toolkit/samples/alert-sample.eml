@@ -1,0 +1,11 @@
+From: printer-noreply@example.local
+To: itsupport@example.local
+Subject: Device Alert - Toner Low
+Date: Mon, 07 Sep 2026 08:00:00 +0000
+Content-Type: text/plain; charset=utf-8
+
+Device Name: Xerox Color Copy Room
+Serial Number: ABC12345XY
+Status: Toner Low
+IP: 192.0.2.10
+Please replace the toner cartridge soon.

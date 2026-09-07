@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe Coding — Landing Page Generator (Demo)</title>
+<style>
+  :root{--bg:#0b1020;--panel:#131a2e;--accent:#3b82f6;--accent2:#22d3ee;--text:#e5e9f5;--muted:#9aa5c0}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+  header{padding:64px 24px;text-align:center;background:radial-gradient(1200px 400px at 50% -10%,rgba(59,130,246,.35),transparent)}
+  h1{font-size:clamp(28px,5vw,48px);margin:0 0 12px}
+  .tag{color:var(--muted);max-width:640px;margin:0 auto;font-size:18px}
+  .wrap{max-width:960px;margin:0 auto;padding:24px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid #1f2942;border-radius:14px;padding:20px}
+  label{display:block;font-size:13px;color:var(--muted);margin:10px 0 6px}
+  input,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #26304d;background:#0e1526;color:var(--text)}
+  button{margin-top:16px;width:100%;padding:12px;border:0;border-radius:10px;cursor:pointer;
+         background:linear-gradient(90deg,var(--accent),var(--accent2));color:#04122b;font-weight:700}
+  .preview{min-height:220px}
+  .hero{padding:28px;border-radius:12px;background:linear-gradient(135deg,#12213f,#0e1526);text-align:center}
+  .hero h2{margin:.2em 0}
+  .pill{display:inline-block;background:#12294d;color:#9fd0ff;border-radius:999px;padding:4px 12px;font-size:12px;margin:4px}
+  footer{text-align:center;color:var(--muted);padding:32px;font-size:13px}
+  a{color:var(--accent2)}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚡ Vibe Coding — Landing Page Generator</h1>
+  <p class="tag">A tiny demo showing AI-assisted "vibe coding": type a few fields and instantly generate a hero section. Pure HTML/CSS/JS, no backend, no data collected.</p>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+    <div class="card">
+      <h3>Inputs</h3>
+      <label>Product / project name</label>
+      <input id="name" value="My Automation Tool">
+      <label>One-line pitch</label>
+      <input id="pitch" value="Automate the boring stuff in Microsoft 365.">
+      <label>Feature tags (comma separated)</label>
+      <input id="tags" value="Power Automate, PowerShell, SharePoint, Python">
+      <label>Call to action</label>
+      <input id="cta" value="Get Started">
+      <button onclick="gen()">Generate hero ✨</button>
+    </div>
+
+    <div class="card">
+      <h3>Live preview</h3>
+      <div id="preview" class="preview"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Built as a portfolio demo by Mateusz Dubak · <a href="https://dubak.tech">dubak.tech</a> ·
+  No analytics, no cookies, no personal data.
+</footer>
+
+<script>
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function gen(){
+  const name=esc(document.getElementById('name').value);
+  const pitch=esc(document.getElementById('pitch').value);
+  const cta=esc(document.getElementById('cta').value);
+  const tags=document.getElementById('tags').value.split(',')
+      .map(t=>t.trim()).filter(Boolean)
+      .map(t=>`<span class="pill">${esc(t)}</span>`).join('');
+  document.getElementById('preview').innerHTML =
+    `<div class="hero"><h2>${name}</h2><p>${pitch}</p><div>${tags}</div>
+     <button style="max-width:220px">${cta}</button></div>`;
+}
+gen();
+</script>
+</body>
+</html>
